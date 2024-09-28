@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title th:text="${username}">User not found!</title>
+</head>
+<body>
+<h1 th:text="${firstname} + ${lastname}"></h1>
+<h2>Email:</h2>
+<p th:text="${email}"></p>
+<h2>Objective:</h2>
+<p th:text="${objective}"></p>
+<h2>Links</h2>
+<ul>
+	<li th:each="links : ${links}" th:text="${link}"></li>
+</ul>
+</body>
+</html>
