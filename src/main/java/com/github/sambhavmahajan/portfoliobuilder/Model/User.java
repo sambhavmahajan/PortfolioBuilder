@@ -2,10 +2,12 @@ package com.github.sambhavmahajan.portfoliobuilder.Model;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -18,7 +20,7 @@ public class User implements UserDetails {
     private String firstname;
     private String lastname;
     public String objective;
-    private boolean enabled;
+    private boolean enabled = true;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Link> Links;
     @ElementCollection(fetch = FetchType.EAGER)
@@ -35,7 +37,7 @@ public class User implements UserDetails {
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
     }
     public void setUsername(String username) {
         this.username = username;
