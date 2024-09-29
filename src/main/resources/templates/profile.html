@@ -6,6 +6,19 @@
 	<title th:text="${username}"></title>
 </head>
 <body>
-test
+
+<form action="/profile" method="POST">
+	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+	<p th:if="${message}" th:text="${message}" style="color:green;"></p>
+	<input type="hidden" name="_method" value="PUT"/>
+	<p><input name="username" th:value="${username}" placeholder="username" readonly></p>
+	<p><input name="email" th:value="${email}" placeholder="email" required></p>
+	<p><input type="password" name="password" th:value="${password}" placeholder="password" required></p>
+	<p><input name="firstname" th:value="${firstname}" placeholder="firstname" required></p>
+	<p><input name="lastname" th:value="${lastname}" placeholder="lastname"></p>
+	<p><textarea name="links" placeholder="links" th:text="${links}"></textarea></p>
+	<p><textarea name="objective" placeholder="objective" th:text="${objective}"></textarea></p>
+	<p><input type="submit" value="update"></p>
+</form>
 </body>
 </html>

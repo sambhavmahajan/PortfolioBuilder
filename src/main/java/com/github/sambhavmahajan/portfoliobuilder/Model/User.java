@@ -5,10 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "Users")
@@ -59,6 +56,7 @@ public class User implements UserDetails {
     public String getPassword() {
         return this.password;
     }
+
     public List<Link> getLinks() {
         return this.Links;
     }
@@ -91,5 +89,15 @@ public class User implements UserDetails {
     }
     public void setObjective(String objective) {
         this.objective = objective;
+    }
+
+    public void LinesToLinks(String lines) {
+        ArrayList<String> arr = new ArrayList<>(Arrays.asList(lines.split("\n")));
+        this.Links.clear();
+        for(String line : arr) {
+            ArrayList<String> tokens = new ArrayList<>(Arrays.asList(line.split(" ")));
+            if(tokens.size() != 2) continue;
+            addLink(new Link(tokens.get(0), tokens.get(1), this));
+        }
     }
 }

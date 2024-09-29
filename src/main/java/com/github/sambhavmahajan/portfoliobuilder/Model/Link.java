@@ -14,9 +14,10 @@ public class Link {
     @JoinColumn(name = "username", nullable = false)
     private User user;
     public Link() {}
-    public Link(String name, String url) {
+    public Link(String name, String url, User u) {
         this.name = name;
         this.url = url;
+        this.user = u;
     }
 
     public String getUrl() {
@@ -33,5 +34,9 @@ public class Link {
 
     public void setName(String name) {
         this.name = name;
+    }
+    @Override
+    public String toString() {
+        return name + " " + url + '\n';
     }
 }

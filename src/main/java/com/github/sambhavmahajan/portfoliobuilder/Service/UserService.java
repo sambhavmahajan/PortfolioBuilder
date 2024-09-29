@@ -7,7 +7,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,13 +27,13 @@ public class UserService implements UserDetailsService {
         return u;
     }
     public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+         return userRepository.findByUsername(username);
     }
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
     @Transactional
-    public void addUser(User user) {
+    public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
